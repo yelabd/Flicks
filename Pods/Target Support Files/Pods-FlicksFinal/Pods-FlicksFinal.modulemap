@@ -1,0 +1,6 @@
+framework module Pods_FlicksFinal {
+  umbrella header "Pods-FlicksFinal-umbrella.h"
+
+  export *
+  module * { export * }
+}
