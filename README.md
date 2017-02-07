@@ -35,8 +35,8 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/V26iY92.gifv' />
-![alt tag](https://raw.githubusercontent.com/yelabd/Flicks/master/demo.gif)v
+
+![alt tag](https://raw.githubusercontent.com/yelabd/Flicks/master/demo.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
