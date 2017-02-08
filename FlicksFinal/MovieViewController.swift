@@ -23,7 +23,8 @@ class MovieViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        UIApplication.shared.statusBarStyle = .lightContent
+
         let title = movieInfo?[0] as! String
         let overview = movieInfo?[1] as! String
         let posterPath = movieInfo?[2] as! String
