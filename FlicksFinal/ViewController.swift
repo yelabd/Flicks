@@ -20,7 +20,7 @@ class ViewController: UIViewController,UICollectionViewDataSource,UISearchBarDel
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        UIApplication.shared.statusBarStyle = .lightContent
+//        UIApplication.shared.statusBarStyle = .lightContent
         movieCollectionView.dataSource = self
         searchBar.delegate = self
         
