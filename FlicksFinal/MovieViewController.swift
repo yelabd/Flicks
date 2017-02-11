@@ -42,6 +42,8 @@ class MovieViewController: UIViewController {
         
         let imageURL = NSURL(string: baseURL + posterPath)
         
+        print("Poster path  \(baseURL)\(posterPath)")
+        
         titleLabel.text = title
         //descLabel.text = overview
         ratingLabel.text = "\(ratingDouble)"
