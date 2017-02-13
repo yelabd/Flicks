@@ -8,6 +8,8 @@ target 'FlicksFinal' do
   # Pods for FlicksFinal
 	pod 'AFNetworking'
 	pod ‘MBProgressHUD’
+    pod 'SwiftyJSON'
+    pod 'Alamofire'
 
   target 'FlicksFinalTests' do
     inherit! :search_paths

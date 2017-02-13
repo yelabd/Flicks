@@ -9,11 +9,15 @@
 import UIKit
 import AFNetworking
 import MBProgressHUD
+import SwiftyJSON
+import Alamofire
 
 class ViewController: UIViewController,UICollectionViewDataSource,UISearchBarDelegate  {
     
-    var movies : [NSDictionary]?
-    var filteredMovies : [NSDictionary]?
+    var movies : [Movie?] = []
+    var filteredMovies : [Movie?] = []
+    
+
 
     @IBOutlet weak var movieCollectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -40,9 +44,12 @@ class ViewController: UIViewController,UICollectionViewDataSource,UISearchBarDel
     }
     
     func getData(){
+        
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
         
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")!
+        
+        let baseURL = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"
         
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         
@@ -50,19 +57,48 @@ class ViewController: UIViewController,UICollectionViewDataSource,UISearchBarDel
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         
-        let task: URLSessionDataTask = session.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
-            if let data = data {
-                MBProgressHUD.hide(for: self.view, animated: true)
-                if let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary {
-                    print(dataDictionary)
-                    
-                    self.movies = dataDictionary["results"] as? [NSDictionary]
+        
+        Alamofire.request(baseURL,method: .get,encoding: URLEncoding.default).validate().responseJSON{response in
+            if response.result.isSuccess{
+                guard let info = response.result.value else {
+                    print("Error")
+                    return
+                }
+                
+                let json = JSON(info)
+                
+                let loadedMovies = json["results"].arrayValue
+                
+                for result in loadedMovies{
+                    let indvMovie = Movie(json : result)
+                    self.movies.append(indvMovie)
                     self.filteredMovies = self.movies
                     self.movieCollectionView.reloadData()
+
+
                 }
-            }
-        }
-        task.resume()
+                
+                
+                
+
+        
+//        let task: URLSessionDataTask = session.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
+//            if let data = data {
+//                MBProgressHUD.hide(for: self.view, animated: true)
+//                let json = JSON(data)
+//                
+//
+//                if let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary {
+//                    print(dataDictionary)
+//                    
+//                    self.movies = dataDictionary["results"] as? [NSDictionary]
+//                    self.filteredMovies = self.movies
+//                    self.movieCollectionView.reloadData()
+//                }
+//            }
+//        }
+            
+//        task.resume()
 
     }
     
