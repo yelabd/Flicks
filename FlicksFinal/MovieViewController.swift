@@ -11,7 +11,7 @@ import AFNetworking
 
 class MovieViewController: UIViewController {
     
-     var movieInfo : [Any]?
+     var movieInfo : Movie?
 
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
@@ -25,10 +25,10 @@ class MovieViewController: UIViewController {
         super.viewDidLoad()
 //        UIApplication.shared.statusBarStyle = .lightContent
 
-        let title = movieInfo?[0] as! String
-        let overview = movieInfo?[1] as! String
-        let posterPath = movieInfo?[2] as! String
-        let ratingDouble = movieInfo?[3] as! Double
+        let title = movieInfo!.title
+        let overview = movieInfo!.overview
+        let posterPath = movieInfo!.posterPath
+        let ratingDouble = movieInfo!.rating
         //        let ratingDouble = Double(ratingString!)
         
         if (ratingDouble < 7 && ratingDouble > 5.5){
