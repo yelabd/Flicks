@@ -20,9 +20,19 @@ class MovieViewController: UIViewController {
     @IBOutlet weak var posterView: UIImageView!
     @IBOutlet weak var ratingView: UIView!
     @IBOutlet weak var descTextView: UITextView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var infoView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: scrollView.bounds.height*1.5
+        )
+        
+        infoView.layer.cornerRadius = 20
+        ratingView.layer.cornerRadius = 12
+        
+    
 //        UIApplication.shared.statusBarStyle = .lightContent
 
         let title = movieInfo!.title
@@ -38,7 +48,7 @@ class MovieViewController: UIViewController {
             self.ratingView.backgroundColor = UIColor.red
         }
         
-        let baseURL = "https://image.tmdb.org/t/p/w342"
+        let baseURL = "https://image.tmdb.org/t/p/w45"
         
         let imageURL = NSURL(string: baseURL + posterPath)
         
@@ -49,9 +59,15 @@ class MovieViewController: UIViewController {
         ratingLabel.text = "\(ratingDouble)"
         descTextView.text = overview
         posterView.setImageWith(imageURL as! URL)
-        backPosterView.setImageWith(imageURL as! URL)
+//        backPosterView.setImageWith(imageURL as! URL)
 
+        let baseHighURL = "https://image.tmdb.org/t/p/original"
+        
+        let imageHighURL = NSURL(string: baseHighURL + posterPath)
+        
+        posterView.setImageWith(imageHighURL as! URL)
 
+        
         // Do any additional setup after loading the view.
     }
 

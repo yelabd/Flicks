@@ -11,7 +11,8 @@ import UIKit
 class MovieCell: UICollectionViewCell {
     
     @IBOutlet weak var posterView: UIImageView!
+    @IBOutlet weak var overLayer: UIView!
     
-    
+   
     
 }

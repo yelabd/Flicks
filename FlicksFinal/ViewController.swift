@@ -16,15 +16,17 @@ class ViewController: UIViewController,UICollectionViewDataSource,UISearchBarDel
     
     var movies : [Movie] = []
     var filteredMovies : [Movie] = []
+    var endpoint : String = "now_playing"
 
     @IBOutlet weak var movieCollectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createSearchBar()
         //        UIApplication.shared.statusBarStyle = .lightContent
         movieCollectionView.dataSource = self
-        searchBar.delegate = self
+//        searchBar.delegate = self
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
@@ -49,7 +51,7 @@ class ViewController: UIViewController,UICollectionViewDataSource,UISearchBarDel
         
 //        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")!
         
-        let baseURL = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"
+        let baseURL = "https://api.themoviedb.org/3/movie/\(endpoint)?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"
         
 //        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
 //        
@@ -83,6 +85,14 @@ class ViewController: UIViewController,UICollectionViewDataSource,UISearchBarDel
         }
     }
     
+    func createSearchBar(){
+        let searchBar = UISearchBar()
+        searchBar.delegate = self
+        searchBar.showsCancelButton = true
+        self.navigationItem.titleView = searchBar
+        
+    }
+    
 
     func collectionView(_ movieCollectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
             return filteredMovies.count
@@ -113,6 +123,7 @@ class ViewController: UIViewController,UICollectionViewDataSource,UISearchBarDel
                 let json = JSON(info)
                 
                 let loadedMovies = json["results"].arrayValue
+                self.movies.removeAll()
                 
                 for result in loadedMovies{
                     let indvMovie = Movie(json : result)
@@ -140,6 +151,11 @@ class ViewController: UIViewController,UICollectionViewDataSource,UISearchBarDel
         let imageURL = NSURL(string: baseURL + posterPath)
         
         cell.posterView.setImageWith(imageURL as! URL)
+        
+        cell.posterView.layer.cornerRadius = 25.0
+        
+        cell.posterView.clipsToBounds = true
+        
         
         
         return cell
@@ -182,13 +198,13 @@ class ViewController: UIViewController,UICollectionViewDataSource,UISearchBarDel
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        self.searchBar.showsCancelButton = true
+        //self.searchBar.showsCancelButton = true
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = false
+//        searchBar.showsCancelButton = false
         searchBar.text = ""
         searchBar.resignFirstResponder()
     }
-
+    
 }
