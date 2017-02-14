@@ -84,6 +84,8 @@ The following **additional** features are implemented:
 - [X] List anything else that you can get done to improve the app functionality!
     - Added collection view instead of table view
     - Modified the corner radii for some of the views to improve UI
+    - User can search for a movie.
+    
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
@@ -93,6 +95,9 @@ Please list two areas of the assignment you'd like to **discuss further with you
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
+
+![alt tag](https://raw.githubusercontent.com/yelabd/Flicks/master/demo2.gif)
+
 
 <img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
